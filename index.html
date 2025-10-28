@@ -1,110 +1,502 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>John & Jill's Wedding</title>
-<style>
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #000;
-  color: #d4af37;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-header {
-  padding: 40px 20px;
-  background-color: #111;
-}
-h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
-}
-h2 {
-  font-weight: normal;
-  color: #f5d77d;
-}
-section {
-  padding: 40px 20px;
-}
-input[type="text"] {
-  padding: 10px;
-  width: 250px;
-  border: 2px solid #d4af37;
-  border-radius: 6px;
-  margin-right: 10px;
-  background: #111;
-  color: #fff;
-}
-button {
-  padding: 10px 15px;
-  background: #d4af37;
-  border: none;
-  color: #000;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-button:hover {
-  background: #b8962e;
-}
-#result {
-  margin-top: 30px;
-  font-size: 1.2em;
-}
-table {
-  margin: 20px auto;
-  border-collapse: collapse;
-  width: 80%;
-  color: #fff;
-}
-th, td {
-  border: 1px solid #d4af37;
-  padding: 8px;
-}
-th {
-  background: #222;
-}
-footer {
-  padding: 20px;
-  background-color: #111;
-  color: #888;
-  font-size: 0.9em;
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nyembo Daniel & Chisanga — Wedding</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f8f4ef;        /* warm beige */
+      --card:#fff;
+      --gold:#caa45a;      /* gold accent */
+      --text:#2b2b2b;      /* deep charcoal */
+      --muted:#6b6b6b;
+      --radius:14px;
+      --shadow: 0 8px 24px rgba(43,43,43,0.06);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    .container{max-width:1100px;margin:28px auto;padding:28px}
+
+    /* Hero */
+    .hero{
+      background: linear-gradient(180deg, rgba(202,164,90,0.03), rgba(202,164,90,0.02));
+      border:1px solid rgba(202,164,90,0.08);
+      padding:28px;border-radius:20px;display:flex;gap:22px;align-items:center;box-shadow:var(--shadow)
+    }
+    .hero .photo{
+      width:140px;height:140px;border-radius:14px;background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder');
+      background-size:cover;background-position:center;border:6px solid rgba(250,245,240,0.8);
+    }
+    h1.title{font-family:'Great Vibes', 'Playfair Display', serif;margin:0;font-size:44px;color:var(--text);letter-spacing:0.5px}
+    .hero .meta{margin-left:8px}
+    p.lead{margin:6px 0 0;color:var(--muted);font-size:15px}
+
+    /* Nav shortcuts */
+    .shortcuts{display:flex;gap:12px;margin-top:14px}
+    .btn{
+      background:transparent;border:1px solid rgba(43,43,43,0.06);padding:10px 14px;border-radius:10px;color:var(--text);cursor:pointer;font-weight:600;
+      display:inline-flex;gap:8px;align-items:center;text-decoration:none
+    }
+    .btn.primary{background:linear-gradient(90deg, rgba(202,164,90,0.12), rgba(202,164,90,0.06));border:1px solid rgba(202,164,90,0.18);color:var(--text)}
+    .btn.ghost{background:transparent}
+
+    /* Layout */
+    .grid{display:grid;grid-template-columns:1fr 420px;gap:24px;margin-top:22px}
+    .card{background:var(--card);border-radius:var(--radius);padding:20px;border:1px solid rgba(43,43,43,0.04);box-shadow:var(--shadow)}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* Event snapshot */
+    .snapshot{display:flex;gap:8px;align-items:center;margin-top:12px}
+    .snapshot .col{flex:1;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(250,245,240,0.8), rgba(255,255,255,0.6));border:1px solid rgba(43,43,43,0.03);text-align:center}
+    .snapshot .col h4{margin:0 0 6px 0;font-size:13px;color:var(--muted)}
+    .snapshot .col p{margin:0;font-weight:600}
+
+    /* Countdown */
+    .countdown{display:flex;gap:12px;margin-top:14px}
+    .countdown .unit{background:var(--card);padding:10px 14px;border-radius:10px;border:1px solid rgba(43,43,43,0.04);text-align:center}
+    .countdown .num{font-size:20px;font-weight:700;color:var(--text)}
+    .countdown .label{font-size:12px;color:var(--muted)}
+
+    /* Gallery / slideshow */
+    .slideshow{position:relative;border-radius:12px;overflow:hidden;margin-top:16px;height:220px;background:#efe9e2}
+    .slides{height:100%;display:flex;transition:transform 0.6s ease}
+    .slide{min-width:100%;background-size:cover;background-position:center}
+    .slide-overlay{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,0.7);padding:8px 10px;border-radius:8px;color:var(--text);font-weight:600}
+
+    /* Program list */
+    .program{margin-top:12px}
+    .program li{margin:8px 0}
+
+    /* Map modal */
+    .map-link{color:var(--gold);text-decoration:underline;cursor:pointer}
+    .modal{position:fixed;inset:0;background:rgba(20,20,20,0.6);display:flex;align-items:center;justify-content:center;z-index:999;display:none}
+    .modal .box{width:90%;max-width:850px;height:70%;background:var(--card);border-radius:12px;overflow:hidden;position:relative}
+    .modal .close{position:absolute;right:10px;top:10px;background:var(--card);border:1px solid rgba(43,43,43,0.06);padding:6px 8px;border-radius:8px;cursor:pointer}
+
+    /* Footer */
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* Guest lookup overrides: make guest card slightly lighter */
+    .lookup{background:linear-gradient(180deg,#fff,#fbf7f3);border:1px solid rgba(43,43,43,0.03)}
+    input[type=text]{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(43,43,43,0.06);background:transparent;color:var(--text);font-size:15px}
+    button{background:transparent;border:1px solid rgba(43,43,43,0.06);padding:10px 16px;border-radius:10px;color:var(--text);cursor:pointer;font-weight:600}
+    button.secondary{background:transparent;border:1px solid rgba(43,43,43,0.04);color:var(--muted)}
+
+    /* Pill styles */
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(43,43,43,0.04);margin-left:8px;font-size:13px}
+    .status-awaiting{color:var(--gold);border-color:rgba(202,164,90,0.15)}
+    .status-checked{color:#2a9d52;border-color:rgba(42,157,82,0.08)}
+
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr}
+      .hero{flex-direction:column;align-items:flex-start}
+      .hero .photo{width:120px;height:120px}
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>John & Jill</h1>
-  <h2>13 November 2025 · Legacy Resort, Lusaka</h2>
-</header>
-<section id="lookup">
-  <h2>Find Your Table</h2>
-  <input type="text" id="guestName" placeholder="Enter your name">
-  <button onclick="searchGuest()">Search</button>
-  <div id="result"></div>
-</section>
-<footer>© 2025 John & Jill's Wedding</footer>
+  <div class="container">
 
-<script>
-const guests = [{'id': '001', 'name': 'Guest 1', 'table': 6, 'status': 'Awaiting Check-In'}, {'id': '002', 'name': 'Guest 2', 'table': 10, 'status': 'Checked-In'}, {'id': '003', 'name': 'Guest 3', 'table': 20, 'status': 'Not Arrived'}, {'id': '004', 'name': 'Guest 4', 'table': 19, 'status': 'Checked-In'}, {'id': '005', 'name': 'Guest 5', 'table': 11, 'status': 'Checked-In'}, {'id': '006', 'name': 'Guest 6', 'table': 14, 'status': 'Not Arrived'}, {'id': '007', 'name': 'Guest 7', 'table': 19, 'status': 'Checked-In'}, {'id': '008', 'name': 'Guest 8', 'table': 3, 'status': 'Awaiting Check-In'}, {'id': '009', 'name': 'Guest 9', 'table': 5, 'status': 'Awaiting Check-In'}, {'id': '010', 'name': 'Guest 10', 'table': 20, 'status': 'Checked-In'}, {'id': '011', 'name': 'Guest 11', 'table': 8, 'status': 'Awaiting Check-In'}, {'id': '012', 'name': 'Guest 12', 'table': 7, 'status': 'Checked-In'}, {'id': '013', 'name': 'Guest 13', 'table': 19, 'status': 'Awaiting Check-In'}, {'id': '014', 'name': 'Guest 14', 'table': 7, 'status': 'Checked-In'}, {'id': '015', 'name': 'Guest 15', 'table': 16, 'status': 'Awaiting Check-In'}, {'id': '016', 'name': 'Guest 16', 'table': 3, 'status': 'Checked-In'}, {'id': '017', 'name': 'Guest 17', 'table': 16, 'status': 'Awaiting Check-In'}, {'id': '018', 'name': 'Guest 18', 'table': 20, 'status': 'Checked-In'}, {'id': '019', 'name': 'Guest 19', 'table': 3, 'status': 'Checked-In'}, {'id': '020', 'name': 'Guest 20', 'table': 5, 'status': 'Not Arrived'}, {'id': '021', 'name': 'Guest 21', 'table': 5, 'status': 'Awaiting Check-In'}, {'id': '022', 'name': 'Guest 22', 'table': 16, 'status': 'Checked-In'}, {'id': '023', 'name': 'Guest 23', 'table': 17, 'status': 'Not Arrived'}, {'id': '024', 'name': 'Guest 24', 'table': 13, 'status': 'Not Arrived'}, {'id': '025', 'name': 'Guest 25', 'table': 3, 'status': 'Not Arrived'}, {'id': '026', 'name': 'Guest 26', 'table': 3, 'status': 'Not Arrived'}, {'id': '027', 'name': 'Guest 27', 'table': 16, 'status': 'Awaiting Check-In'}, {'id': '028', 'name': 'Guest 28', 'table': 3, 'status': 'Checked-In'}, {'id': '029', 'name': 'Guest 29', 'table': 12, 'status': 'Not Arrived'}, {'id': '030', 'name': 'Guest 30', 'table': 17, 'status': 'Not Arrived'}, {'id': '031', 'name': 'Guest 31', 'table': 16, 'status': 'Not Arrived'}, {'id': '032', 'name': 'Guest 32', 'table': 8, 'status': 'Awaiting Check-In'}, {'id': '033', 'name': 'Guest 33', 'table': 12, 'status': 'Checked-In'}, {'id': '034', 'name': 'Guest 34', 'table': 8, 'status': 'Awaiting Check-In'}, {'id': '035', 'name': 'Guest 35', 'table': 13, 'status': 'Awaiting Check-In'}, {'id': '036', 'name': 'Guest 36', 'table': 4, 'status': 'Awaiting Check-In'}, {'id': '037', 'name': 'Guest 37', 'table': 10, 'status': 'Not Arrived'}, {'id': '038', 'name': 'Guest 38', 'table': 14, 'status': 'Checked-In'}, {'id': '039', 'name': 'Guest 39', 'table': 7, 'status': 'Checked-In'}, {'id': '040', 'name': 'Guest 40', 'table': 10, 'status': 'Not Arrived'}, {'id': '041', 'name': 'Guest 41', 'table': 18, 'status': 'Checked-In'}, {'id': '042', 'name': 'Guest 42', 'table': 3, 'status': 'Not Arrived'}, {'id': '043', 'name': 'Guest 43', 'table': 15, 'status': 'Checked-In'}, {'id': '044', 'name': 'Guest 44', 'table': 2, 'status': 'Awaiting Check-In'}, {'id': '045', 'name': 'Guest 45', 'table': 6, 'status': 'Awaiting Check-In'}, {'id': '046', 'name': 'Guest 46', 'table': 18, 'status': 'Checked-In'}, {'id': '047', 'name': 'Guest 47', 'table': 10, 'status': 'Checked-In'}, {'id': '048', 'name': 'Guest 48', 'table': 13, 'status': 'Not Arrived'}, {'id': '049', 'name': 'Guest 49', 'table': 3, 'status': 'Awaiting Check-In'}, {'id': '050', 'name': 'Guest 50', 'table': 4, 'status': 'Checked-In'}, {'id': '051', 'name': 'Guest 51', 'table': 2, 'status': 'Not Arrived'}, {'id': '052', 'name': 'Guest 52', 'table': 18, 'status': 'Awaiting Check-In'}, {'id': '053', 'name': 'Guest 53', 'table': 15, 'status': 'Checked-In'}, {'id': '054', 'name': 'Guest 54', 'table': 20, 'status': 'Not Arrived'}, {'id': '055', 'name': 'Guest 55', 'table': 3, 'status': 'Awaiting Check-In'}, {'id': '056', 'name': 'Guest 56', 'table': 8, 'status': 'Checked-In'}, {'id': '057', 'name': 'Guest 57', 'table': 8, 'status': 'Checked-In'}, {'id': '058', 'name': 'Guest 58', 'table': 13, 'status': 'Not Arrived'}, {'id': '059', 'name': 'Guest 59', 'table': 8, 'status': 'Awaiting Check-In'}, {'id': '060', 'name': 'Guest 60', 'table': 16, 'status': 'Not Arrived'}, {'id': '061', 'name': 'Guest 61', 'table': 9, 'status': 'Awaiting Check-In'}, {'id': '062', 'name': 'Guest 62', 'table': 9, 'status': 'Checked-In'}, {'id': '063', 'name': 'Guest 63', 'table': 11, 'status': 'Checked-In'}, {'id': '064', 'name': 'Guest 64', 'table': 13, 'status': 'Not Arrived'}, {'id': '065', 'name': 'Guest 65', 'table': 5, 'status': 'Not Arrived'}, {'id': '066', 'name': 'Guest 66', 'table': 14, 'status': 'Awaiting Check-In'}, {'id': '067', 'name': 'Guest 67', 'table': 10, 'status': 'Checked-In'}, {'id': '068', 'name': 'Guest 68', 'table': 4, 'status': 'Awaiting Check-In'}, {'id': '069', 'name': 'Guest 69', 'table': 10, 'status': 'Awaiting Check-In'}, {'id': '070', 'name': 'Guest 70', 'table': 20, 'status': 'Not Arrived'}, {'id': '071', 'name': 'Guest 71', 'table': 13, 'status': 'Awaiting Check-In'}, {'id': '072', 'name': 'Guest 72', 'table': 10, 'status': 'Awaiting Check-In'}, {'id': '073', 'name': 'Guest 73', 'table': 12, 'status': 'Awaiting Check-In'}, {'id': '074', 'name': 'Guest 74', 'table': 11, 'status': 'Not Arrived'}, {'id': '075', 'name': 'Guest 75', 'table': 11, 'status': 'Awaiting Check-In'}, {'id': '076', 'name': 'Guest 76', 'table': 5, 'status': 'Not Arrived'}, {'id': '077', 'name': 'Guest 77', 'table': 9, 'status': 'Awaiting Check-In'}, {'id': '078', 'name': 'Guest 78', 'table': 19, 'status': 'Awaiting Check-In'}, {'id': '079', 'name': 'Guest 79', 'table': 6, 'status': 'Not Arrived'}, {'id': '080', 'name': 'Guest 80', 'table': 4, 'status': 'Not Arrived'}, {'id': '081', 'name': 'Guest 81', 'table': 13, 'status': 'Checked-In'}, {'id': '082', 'name': 'Guest 82', 'table': 20, 'status': 'Not Arrived'}, {'id': '083', 'name': 'Guest 83', 'table': 6, 'status': 'Awaiting Check-In'}, {'id': '084', 'name': 'Guest 84', 'table': 5, 'status': 'Not Arrived'}, {'id': '085', 'name': 'Guest 85', 'table': 11, 'status': 'Awaiting Check-In'}, {'id': '086', 'name': 'Guest 86', 'table': 2, 'status': 'Not Arrived'}, {'id': '087', 'name': 'Guest 87', 'table': 2, 'status': 'Checked-In'}, {'id': '088', 'name': 'Guest 88', 'table': 9, 'status': 'Checked-In'}, {'id': '089', 'name': 'Guest 89', 'table': 17, 'status': 'Not Arrived'}, {'id': '090', 'name': 'Guest 90', 'table': 9, 'status': 'Checked-In'}, {'id': '091', 'name': 'Guest 91', 'table': 13, 'status': 'Awaiting Check-In'}, {'id': '092', 'name': 'Guest 92', 'table': 7, 'status': 'Not Arrived'}, {'id': '093', 'name': 'Guest 93', 'table': 11, 'status': 'Not Arrived'}, {'id': '094', 'name': 'Guest 94', 'table': 20, 'status': 'Awaiting Check-In'}, {'id': '095', 'name': 'Guest 95', 'table': 11, 'status': 'Awaiting Check-In'}, {'id': '096', 'name': 'Guest 96', 'table': 14, 'status': 'Awaiting Check-In'}, {'id': '097', 'name': 'Guest 97', 'table': 13, 'status': 'Not Arrived'}, {'id': '098', 'name': 'Guest 98', 'table': 20, 'status': 'Checked-In'}, {'id': '099', 'name': 'Guest 99', 'table': 5, 'status': 'Checked-In'}, {'id': '100', 'name': 'Guest 100', 'table': 6, 'status': 'Checked-In'}];
+    <!-- HERO / HOME -->
+    <header class="hero" id="home">
+      <div class="photo" id="heroPhoto" aria-hidden="true"></div>
+      <div class="meta">
+        <h1 class="title">Nyembo Daniel &amp; Chisanga</h1>
+        <p class="lead">December 27, 2025 • Legacy Resort, Lusaka, Zambia</p>
+        <p style="margin-top:8px;color:var(--muted)">Two hearts, one love, one lifetime.</p>
 
-function searchGuest() {
-  const nameInput = document.getElementById('guestName').value.trim().toLowerCase();
-  const resultDiv = document.getElementById('result');
-  resultDiv.innerHTML = '';
-  if (!nameInput) {
-    resultDiv.innerHTML = '<p>Please enter your name.</p>';
-    return;
-  }
-  const found = guests.find(g => g.name.toLowerCase() === nameInput);
-  if (found) {
-    resultDiv.innerHTML = `<p><strong>${found.name}</strong><br>Table Number: <strong>${found.table}</strong><br>Status: <strong>${found.status}</strong></p>`;
-  } else {
-    resultDiv.innerHTML = '<p>Name not found. Please check your spelling.</p>';
-  }
-}
-</script>
+        <div class="shortcuts">
+          <a href="#details" class="btn primary">📅 Event Details</a>
+          <a href="#gallery" class="btn">📸 Gallery</a>
+          <a href="#guests" class="btn">🪪 Find Your Table</a>
+        </div>
+
+        <div class="countdown" style="margin-top:14px" aria-live="polite" id="countdownRoot">
+          <div class="unit"><div class="num" id="cdDays">—</div><div class="label">Days</div></div>
+          <div class="unit"><div class="num" id="cdHours">—</div><div class="label">Hours</div></div>
+          <div class="unit"><div class="num" id="cdMinutes">—</div><div class="label">Minutes</div></div>
+          <div class="unit"><div class="num" id="cdSeconds">—</div><div class="label">Seconds</div></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN GRID -->
+    <div class="grid">
+
+      <!-- LEFT: Details, slideshow, program -->
+      <main>
+        <div class="card" id="details">
+          <h2 style="font-family:'Playfair Display', serif;margin:0;color:var(--gold)">Welcome</h2>
+          <p class="muted" style="margin-top:8px">Welcome to our wedding website! We’re so excited to celebrate this special day with our family and friends. Here you’ll find all the details you need — from the schedule and venue to accommodation and RSVP.</p>
+
+          <div class="snapshot" aria-hidden="true" style="margin-top:14px">
+            <div class="col">
+              <h4>Ceremony</h4>
+              <p>Legacy Resort</p>
+            </div>
+            <div class="col">
+              <h4>Reception</h4>
+              <p>Legacy Resort</p>
+            </div>
+            <div class="col">
+              <h4>Dress Code</h4>
+              <p>Elegant Attire</p>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center;margin-top:14px">
+            <button class="btn primary" onclick="document.getElementById('programScroll').scrollIntoView({behavior:'smooth'})">View Full Schedule</button>
+            <span class="muted" style="font-size:14px">Table: Legacy Resort • <span class="map-link" id="openMap">Legacy Resort, Lusaka</span></span>
+          </div>
+
+          <hr style="border:none;border-top:1px solid rgba(43,43,43,0.04);margin:18px 0">
+
+          <h3 style="margin:0 0 8px 0;font-family:'Playfair Display'">Gallery</h3>
+          <div id="gallery" class="slideshow" role="region" aria-label="Engagement photos slideshow">
+            <div class="slides" id="slides">
+              <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1400&auto=format&fit=crop&s=placeholder')"></div>
+              <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1400&auto=format&fit=crop&s=placeholder')"></div>
+              <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1524503033411-c9566986fc8f?q=80&w=1400&auto=format&fit=crop&s=placeholder')"></div>
+            </div>
+            <div class="slide-overlay">Soft moments — replace with your photos</div>
+          </div>
+
+          <p class="muted" style="margin-top:12px">We can’t wait to celebrate love, laughter, and forever with you.</p>
+        </div>
+
+        <div class="card program" id="programScroll">
+          <h2 style="margin-top:0;font-family:'Playfair Display';color:var(--gold)">Program</h2>
+          <ul class="muted" style="margin-top:10px">
+            <li><strong>1:30 PM</strong> — Arrival of guests</li>
+            <li><strong>2:05 PM</strong> — Wedding talk</li>
+            <li><strong>3:10 PM</strong> — Photoshoot, tree guestbook and drinks</li>
+            <li><strong>5:10 PM</strong> — Guests enter reception hall</li>
+            <li><strong>9:30 PM</strong> — End of program</li>
+          </ul>
+
+          <hr style="border:none;border-top:1px solid rgba(43,43,43,0.04);margin:16px 0">
+          <p class="muted">Reception Hall Access — Cynthia Mulumba, Table 7. No casual outfits; no white dresses. Strictly no children. Outside alcohol is not permitted. Cash bar available at venue.</p>
+        </div>
+      </main>
+
+      <!-- RIGHT: Guest lookup (existing content adapted) -->
+      <aside class="card lookup" id="guests" aria-labelledby="lookupHeading">
+        <h2 id="lookupHeading" style="margin-top:0;font-family:'Playfair Display';color:var(--gold)">Find Your Table</h2>
+        <p class="muted">Enter your name exactly as on the invitation (search is case-insensitive and supports partial names).</p>
+
+        <div style="margin-top:12px">
+          <div class="form-row" style="display:flex;gap:12px">
+            <input id="nameInput" type="text" placeholder="Type your name e.g. John Dert" aria-label="Guest name">
+            <button id="searchBtn">Search</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button id="clearBtn" class="secondary">Clear</button>
+            <button id="randomBtn" class="secondary">Try a random guest</button>
+          </div>
+          <div id="result" class="result" style="display:none;margin-top:12px" aria-live="polite"></div>
+
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button id="showAll" class="secondary">Show All</button>
+            <button id="downloadCsv" class="secondary">Download CSV</button>
+          </div>
+
+          <div id="allGuestsContainer" style="margin-top:12px;display:none;max-height:420px;overflow:auto">
+            <table id="guestTable" aria-live="polite">
+              <thead><tr><th>ID</th><th>Name</th><th>Table</th><th>Status</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <footer>
+      Made with love 💕 by the couple — &copy; 2025
+    </footer>
+  </div>
+
+  <!-- Map Modal -->
+  <div class="modal" id="mapModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="box" role="document">
+      <button class="close" id="closeMap">Close</button>
+      <!-- Using a search-based embed so it loads without an API key.
+           Replace the query parameter if you prefer a precise place id or use Maps Embed API with a key. -->
+      <iframe
+        id="mapFrame"
+        title="Legacy Resort, Lusaka map"
+        src="https://www.google.com/maps?q=Legacy%20Resort%20Lusaka%20Zambia&output=embed"
+        width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+  <!-- ===========================
+       Existing Guest Data + Logic (untouched behavior)
+       Replace or edit the 'guests' array as needed.
+       =========================== -->
+  <script>
+    // Guest dataset (100 records) - kept from your original file
+    const guests = [
+      {id:'001', name:'John Dert', table:7, status:'Awaiting Check-In'},
+      {id:'002', name:'Jill Kaye', table:3, status:'Awaiting Check-In'},
+      {id:'003', name:'Samuel Banda', table:12, status:'Checked-In'},
+      {id:'004', name:'Rebecca Mwansa', table:5, status:'Awaiting Check-In'},
+      {id:'005', name:'Peter Zulu', table:9, status:'Awaiting Check-In'},
+      {id:'006', name:'Grace Phiri', table:2, status:'Checked-In'},
+      {id:'007', name:'Michael Phiri', table:4, status:'Awaiting Check-In'},
+      {id:'008', name:'Esther Lungu', table:8, status:'Awaiting Check-In'},
+      {id:'009', name:'David Tembo', table:10, status:'Checked-In'},
+      {id:'010', name:'Alice Mwape', table:1, status:'Awaiting Check-In'},
+      {id:'011', name:'Brian Chanda', table:6, status:'Awaiting Check-In'},
+      {id:'012', name:'Chanda Simu', table:14, status:'Awaiting Check-In'},
+      {id:'013', name:'Felicity Mumba', table:11, status:'Awaiting Check-In'},
+      {id:'014', name:'Aaron Kunda', table:7, status:'Awaiting Check-In'},
+      {id:'015', name:'Beatrice Lombe', table:13, status:'Checked-In'},
+      {id:'016', name:'Cynthia Moyo', table:16, status:'Awaiting Check-In'},
+      {id:'017', name:'Daniel Mulenga', table:18, status:'Awaiting Check-In'},
+      {id:'018', name:'Evelyn Chileshe', table:20, status:'Awaiting Check-In'},
+      {id:'019', name:'Frank Zimba', table:15, status:'Checked-In'},
+      {id:'020', name:'Gloria Simbao', table:19, status:'Awaiting Check-In'},
+      {id:'021', name:'Harry Lungu', table:5, status:'Awaiting Check-In'},
+      {id:'022', name:'Irene Phiri', table:2, status:'Awaiting Check-In'},
+      {id:'023', name:'Jack Mwanza', table:4, status:'Checked-In'},
+      {id:'024', name:'Karen Mwila', table:6, status:'Awaiting Check-In'},
+      {id:'025', name:'Leonard Mumba', table:9, status:'Awaiting Check-In'},
+      {id:'026', name:'Monica Ngoma', table:8, status:'Awaiting Check-In'},
+      {id:'027', name:'Nathan Kaluba', table:12, status:'Awaiting Check-In'},
+      {id:'028', name:'Olivia Chola', table:11, status:'Awaiting Check-In'},
+      {id:'029', name:'Paul Simwaka', table:13, status:'Checked-In'},
+      {id:'030', name:'Queenie Zulu', table:1, status:'Awaiting Check-In'},
+      {id:'031', name:'Rose Mwape', table:14, status:'Awaiting Check-In'},
+      {id:'032', name:'Steve Kunda', table:17, status:'Awaiting Check-In'},
+      {id:'033', name:'Tracy Banda', table:3, status:'Awaiting Check-In'},
+      {id:'034', name:'Ulysses Phiri', table:10, status:'Awaiting Check-In'},
+      {id:'035', name:'Violet Chileshe', table:16, status:'Awaiting Check-In'},
+      {id:'036', name:'Walter Mwewa', table:18, status:'Checked-In'},
+      {id:'037', name:'Xena Jacobs', table:19, status:'Awaiting Check-In'},
+      {id:'038', name:'Yusuf Ahmed', table:20, status:'Awaiting Check-In'},
+      {id:'039', name:'Zoe Mwila', table:15, status:'Awaiting Check-In'},
+      {id:'040', name:'Amos Kaira', table:7, status:'Awaiting Check-In'},
+      {id:'041', name:'Bella Nkhoma', table:4, status:'Awaiting Check-In'},
+      {id:'042', name:'Caleb Nchito', table:6, status:'Checked-In'},
+      {id:'043', name:'Doris Sitali', table:2, status:'Awaiting Check-In'},
+      {id:'044', name:'Eddie Phiri', table:9, status:'Awaiting Check-In'},
+      {id:'045', name:'Fiona Lungu', table:5, status:'Awaiting Check-In'},
+      {id:'046', name:'Gideon Mwansa', table:8, status:'Checked-In'},
+      {id:'047', name:'Hannah Lubinda', table:11, status:'Awaiting Check-In'},
+      {id:'048', name:'Isaac Zimba', table:13, status:'Awaiting Check-In'},
+      {id:'049', name:'Joyce Mweetwa', table:1, status:'Awaiting Check-In'},
+      {id:'050', name:'Ken Ndalama', table:12, status:'Awaiting Check-In'},
+      {id:'051', name:'Lilian Chanda', table:14, status:'Awaiting Check-In'},
+      {id:'052', name:'Mark Kasonde', table:17, status:'Checked-In'},
+      {id:'053', name:'Nora Lungu', table:18, status:'Awaiting Check-In'},
+      {id:'054', name:'Oscar Tembo', table:16, status:'Awaiting Check-In'},
+      {id:'055', name:'Patricia Mulenga', table:19, status:'Awaiting Check-In'},
+      {id:'056', name:'Quincy Phiri', table:3, status:'Awaiting Check-In'},
+      {id:'057', name:'Rita Chisala', table:20, status:'Awaiting Check-In'},
+      {id:'058', name:'Simon Njobvu', table:15, status:'Awaiting Check-In'},
+      {id:'059', name:'Tessa Mwila', table:4, status:'Checked-In'},
+      {id:'060', name:'Uriel Kunda', table:6, status:'Awaiting Check-In'},
+      {id:'061', name:'Vanessa Mbewe', table:9, status:'Awaiting Check-In'},
+      {id:'062', name:'Wilfred Sitali', table:2, status:'Awaiting Check-In'},
+      {id:'063', name:'Xolani Dube', table:8, status:'Awaiting Check-In'},
+      {id:'064', name:'Yolanda Banda', table:11, status:'Checked-In'},
+      {id:'065', name:'Zack Kaira', table:10, status:'Awaiting Check-In'},
+      {id:'066', name:'Aisha Karim', table:13, status:'Awaiting Check-In'},
+      {id:'067', name:'Benard Phiri', table:1, status:'Awaiting Check-In'},
+      {id:'068', name:'Cecilia Mwale', table:12, status:'Awaiting Check-In'},
+      {id:'069', name:'Dexter Lombe', table:14, status:'Awaiting Check-In'},
+      {id:'070', name:'Eartha Chola', table:17, status:'Awaiting Check-In'},
+      {id:'071', name:'Felix Nkwazi', table:18, status:'Awaiting Check-In'},
+      {id:'072', name:'Glenda Mwewa', table:16, status:'Checked-In'},
+      {id:'073', name:'Hugo Banda', table:19, status:'Awaiting Check-In'},
+      {id:'074', name:'Ivy Kunda', table:20, status:'Awaiting Check-In'},
+      {id:'075', name:'Jasper Lungu', table:15, status:'Awaiting Check-In'},
+      {id:'076', name:'Kathy Mwape', table:7, status:'Awaiting Check-In'},
+      {id:'077', name:'Larry Simu', table:5, status:'Awaiting Check-In'},
+      {id:'078', name:'Maya Zulu', table:3, status:'Checked-In'},
+      {id:'079', name:'Ned Mwansa', table:6, status:'Awaiting Check-In'},
+      {id:'080', name:'Ophelia Chileshe', table:9, status:'Awaiting Check-In'},
+      {id:'081', name:'Peter Kaye', table:4, status:'Awaiting Check-In'},
+      {id:'082', name:'Queen Mwila', table:11, status:'Awaiting Check-In'},
+      {id:'083', name:'Ralph Simwaka', table:2, status:'Awaiting Check-In'},
+      {id:'084', name:'Sophie Nkhoma', table:8, status:'Checked-In'},
+      {id:'085', name:'Tommy Kasonde', table:10, status:'Awaiting Check-In'},
+      {id:'086', name:'Una Chisala', table:12, status:'Awaiting Check-In'},
+      {id:'087', name:'Victor Njobvu', table:13, status:'Awaiting Check-In'},
+      {id:'088', name:'Winnie Mweetwa', table:14, status:'Awaiting Check-In'},
+      {id:'089', name:'Xavier Lubinda', table:16, status:'Awaiting Check-In'},
+      {id:'090', name:'Yvonne Ngoma', table:17, status:'Awaiting Check-In'},
+      {id:'091', name:'Zanele Jacobs', table:18, status:'Checked-In'},
+      {id:'092', name:'Aaron Lombe', table:19, status:'Awaiting Check-In'},
+      {id:'093', name:'Brenda Tembo', table:20, status:'Awaiting Check-In'},
+      {id:'094', name:'Calvin Kaira', table:1, status:'Awaiting Check-In'},
+      {id:'095', name:'Diana Mwewa', table:5, status:'Awaiting Check-In'},
+      {id:'096', name:'Ethan Chanda', table:6, status:'Awaiting Check-In'},
+      {id:'097', name:'Faith Mwansa', table:9, status:'Awaiting Check-In'},
+      {id:'098', name:'Gavin Nchito', table:3, status:'Awaiting Check-In'},
+      {id:'099', name:'Hillary Phiri', table:2, status:'Awaiting Check-In'},
+      {id:'100', name:'Imani Banda', table:4, status:'Awaiting Check-In'}
+    ];
+
+    // -----------------------------
+    // Helpers & DOM (kept behavior)
+    // -----------------------------
+    const nameInput = document.getElementById('nameInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const resultDiv = document.getElementById('result');
+    const clearBtn = document.getElementById('clearBtn');
+    const randomBtn = document.getElementById('randomBtn');
+    const showAll = document.getElementById('showAll');
+    const allGuestsContainer = document.getElementById('allGuestsContainer');
+    const guestTableBody = document.querySelector('#guestTable tbody');
+    const downloadCsv = document.getElementById('downloadCsv');
+
+    function normalize(s){return s.trim().toLowerCase();}
+
+    function findGuestsByName(query){
+      if(!query) return [];
+      const q = normalize(query);
+      // match if query is a substring of the guest name OR matches id
+      return guests.filter(g => normalize(g.name).includes(q) || g.id === q.padStart(3,'0'));
+    }
+
+    function renderResult(list){
+      if(!list || list.length === 0){
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `<div class="name">No matches found</div><div class="muted" style="margin-top:6px">Please check spelling or try a partial name (e.g. "John").</div>`;
+        return;
+      }
+      // multiple
+      if(list.length > 1){
+        let html = `<div class="name">Found ${list.length} matches</div><div style="margin-top:8px">`;
+        html += '<table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left">Name</th><th>Table</th><th>Status</th></tr></thead><tbody>';
+        for(const g of list.slice(0,50)){
+          html += `<tr><td style="padding:6px 8px">${escapeHtml(g.name)}</td><td style="padding:6px 8px">${g.table}</td><td style="padding:6px 8px"><span class="pill ${g.status === 'Checked-In' ? 'status-checked' : 'status-awaiting'}">${g.status}</span></td></tr>`;
+        }
+        html += '</tbody></table>';
+        html += '</div>';
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = html;
+        return;
+      }
+      // single match
+      const g = list[0];
+      let sClass = g.status === 'Checked-In' ? 'status-checked' : 'status-awaiting';
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = `<div class="name">${escapeHtml(g.name)} <span class="pill">Table ${g.table}</span></div><div style="margin-top:6px" class="muted">Status: <span class="${sClass}">${g.status}</span></div>`;
+    }
+
+    function escapeHtml(text){return (text+'').replace(/[&<>\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]||c));}
+
+    searchBtn.addEventListener('click', ()=>{
+      const q = nameInput.value;
+      const res = findGuestsByName(q);
+      renderResult(res);
+    });
+
+    clearBtn.addEventListener('click', ()=>{ nameInput.value=''; resultDiv.style.display='none'; nameInput.focus(); });
+
+    randomBtn.addEventListener('click', ()=>{ const idx = Math.floor(Math.random()*guests.length); nameInput.value = guests[idx].name; const res = findGuestsByName(guests[idx].name); renderResult(res); });
+
+    showAll.addEventListener('click', ()=>{
+      if(allGuestsContainer.style.display === 'none' || allGuestsContainer.style.display === ''){
+        populateGuestTable(); allGuestsContainer.style.display='block'; showAll.textContent='Hide All'; window.location.hash='all';
+      } else { allGuestsContainer.style.display='none'; showAll.textContent='Show All'; }
+    });
+
+    function populateGuestTable(){
+      guestTableBody.innerHTML = '';
+      for(const g of guests){
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${g.id}</td><td>${escapeHtml(g.name)}</td><td>${g.table}</td><td><span class="pill ${g.status === 'Checked-In' ? 'status-checked' : 'status-awaiting'}">${g.status}</span></td>`;
+        guestTableBody.appendChild(tr);
+      }
+    }
+
+    // CSV download
+    function guestsToCsv(){
+      const header = ['ID','Name','Table','Status'];
+      const rows = guests.map(g => [g.id, '"'+g.name.replace(/"/g,'""')+'"', g.table, g.status]);
+      return [header.join(','), ...rows.map(r=>r.join(','))].join('\n');
+    }
+
+    downloadCsv.addEventListener('click', ()=>{
+      const csv = guestsToCsv();
+      const blob = new Blob([csv], {type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'guestlist.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    nameInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ searchBtn.click(); } });
+    window.addEventListener('load', ()=>{ nameInput.focus(); });
+
+    // If URL has ?name=... prefill
+    (function checkQuery(){
+      const params = new URLSearchParams(window.location.search);
+      if(params.has('name')){ nameInput.value = params.get('name'); searchBtn.click(); }
+    })();
+
+    // -----------------------------
+    // Slideshow logic (simple)
+    // -----------------------------
+    (function slideshowInit(){
+      const slides = document.getElementById('slides');
+      let idx = 0;
+      setInterval(()=>{ idx = (idx+1) % slides.children.length; slides.style.transform = `translateX(-${idx*100}%)`; }, 4500);
+    })();
+
+    // -----------------------------
+    // Countdown to midnight Dec 27, 2025 (local)
+    // -----------------------------
+    (function countdownInit(){
+      // target: 2025-12-27 00:00:00 local time
+      const target = new Date(2025, 11, 27, 0, 0, 0); // months: 0-11 -> 11 = December
+      const elDays = document.getElementById('cdDays');
+      const elHours = document.getElementById('cdHours');
+      const elMinutes = document.getElementById('cdMinutes');
+      const elSeconds = document.getElementById('cdSeconds');
+
+      function update(){
+        const now = new Date();
+        let diff = Math.max(0, target - now);
+        const days = Math.floor(diff / (1000*60*60*24)); diff -= days*(1000*60*60*24);
+        const hours = Math.floor(diff / (1000*60*60)); diff -= hours*(1000*60*60);
+        const minutes = Math.floor(diff / (1000*60)); diff -= minutes*(1000*60);
+        const seconds = Math.floor(diff / 1000);
+        elDays.textContent = String(days).padStart(2,'0');
+        elHours.textContent = String(hours).padStart(2,'0');
+        elMinutes.textContent = String(minutes).padStart(2,'0');
+        elSeconds.textContent = String(seconds).padStart(2,'0');
+      }
+      update();
+      setInterval(update, 1000);
+    })();
+
+    // -----------------------------
+    // Map modal open/close
+    // -----------------------------
+    const openMap = document.getElementById('openMap');
+    const mapModal = document.getElementById('mapModal');
+    const closeMap = document.getElementById('closeMap');
+    openMap.addEventListener('click', ()=>{ mapModal.style.display='flex'; mapModal.setAttribute('aria-hidden','false'); });
+    closeMap.addEventListener('click', ()=>{ mapModal.style.display='none'; mapModal.setAttribute('aria-hidden','true'); });
+    mapModal.addEventListener('click', (e)=>{ if(e.target === mapModal) { mapModal.style.display='none'; mapModal.setAttribute('aria-hidden','true'); } });
+
+    // Accessibility: trap focus when modal open (simple)
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && mapModal.style.display === 'flex'){ mapModal.style.display='none'; mapModal.setAttribute('aria-hidden','true'); }
+    });
+
+  </script>
 </body>
 </html>
+
