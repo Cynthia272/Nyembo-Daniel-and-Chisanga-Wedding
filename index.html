@@ -134,7 +134,7 @@
       <main>
         <div class="card" id="details">
           <h2 style="font-family:'Playfair Display', serif;margin:0;color:var(--gold)">Welcome</h2>
-          <p class="muted" style="margin-top:8px">Welcome to our wedding website! We’re so excited to celebrate this special day with our family and friends. Here you’ll find all the details you need — from the schedule and venue to accommodation and RSVP.</p>
+          <p class="muted" style="margin-top:8px">Welcome to our wedding website! We’re so excited to celebrate this special day with our family and friends. Here you’ll find all the details you need — from the Schedule and Venue to the Table you'll be seated.</p>
           <h3 style="margin-top:18px;font-family:'Playfair Display',serif;color:var(--gold)">Gifts</h3>
 <p class="muted" style="margin-top:8px">
   Having you with us is the best gift we could ask for. 
@@ -419,6 +419,50 @@
         guestTableBody.appendChild(tr);
       }
     }
+    // Countdown to midnight Dec 27, 2025 (local)
+document.addEventListener("DOMContentLoaded", function() {
+  const target = new Date(2025, 11, 27, 0, 0, 0); // months: 0–11, so 11 = December
+
+  const elDays = document.getElementById("cdDays");
+  const elHours = document.getElementById("cdHours");
+  const elMinutes = document.getElementById("cdMinutes");
+  const elSeconds = document.getElementById("cdSeconds");
+
+  if (!elDays || !elHours || !elMinutes || !elSeconds) {
+    console.error("Countdown elements not found in DOM");
+    return;
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+    let diff = target - now;
+
+    if (diff <= 0) {
+      elDays.textContent = "00";
+      elHours.textContent = "00";
+      elMinutes.textContent = "00";
+      elSeconds.textContent = "00";
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= days * (1000 * 60 * 60 * 24);
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+    const minutes = Math.floor(diff / (1000 * 60));
+    diff -= minutes * (1000 * 60);
+    const seconds = Math.floor(diff / 1000);
+
+    elDays.textContent = String(days).padStart(2, "0");
+    elHours.textContent = String(hours).padStart(2, "0");
+    elMinutes.textContent = String(minutes).padStart(2, "0");
+    elSeconds.textContent = String(seconds).padStart(2, "0");
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+});
+
 
     // If URL has ?name=... prefill
     (function checkQuery(){
