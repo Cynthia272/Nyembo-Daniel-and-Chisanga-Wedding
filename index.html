@@ -420,24 +420,6 @@
       }
     }
 
-    // CSV download
-    function guestsToCsv(){
-      const header = ['ID','Name','Table','Status'];
-      const rows = guests.map(g => [g.id, '"'+g.name.replace(/"/g,'""')+'"', g.table, g.status]);
-      return [header.join(','), ...rows.map(r=>r.join(','))].join('\n');
-    }
-
-    downloadCsv.addEventListener('click', ()=>{
-      const csv = guestsToCsv();
-      const blob = new Blob([csv], {type:'text/csv'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'guestlist.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    });
-
-    nameInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ searchBtn.click(); } });
-    window.addEventListener('load', ()=>{ nameInput.focus(); });
-
     // If URL has ?name=... prefill
     (function checkQuery(){
       const params = new URLSearchParams(window.location.search);
