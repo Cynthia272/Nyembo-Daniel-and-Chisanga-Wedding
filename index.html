@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nyembo Daniel & Chisanga — Wedding</title>
+  <title>Nyembo Daniel & Chisanga Wedding</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,7 +108,7 @@
     <header class="hero" id="home">
       <div class="photo" id="heroPhoto" aria-hidden="true"></div>
       <div class="meta">
-        <h1 class="title">Nyembo Daniel &amp; Chisanga</h1>
+        <h1 class="title">Nyembo Daniel &amp; Chisanga's Wedding</h1>
         <p class="lead">December 27, 2025 • Legacy Resort, Lusaka, Zambia</p>
         <p style="margin-top:8px;color:var(--muted)">Two hearts, one love, one lifetime.</p>
 
@@ -135,6 +135,11 @@
         <div class="card" id="details">
           <h2 style="font-family:'Playfair Display', serif;margin:0;color:var(--gold)">Welcome</h2>
           <p class="muted" style="margin-top:8px">Welcome to our wedding website! We’re so excited to celebrate this special day with our family and friends. Here you’ll find all the details you need — from the schedule and venue to accommodation and RSVP.</p>
+          <h3 style="margin-top:18px;font-family:'Playfair Display',serif;color:var(--gold)">Gifts</h3>
+<p class="muted" style="margin-top:8px">
+  Having you with us is the best gift we could ask for. 
+  But if you still feel generous, travel-friendly or monetary gifts would be appreciated.
+</p>
 
           <div class="snapshot" aria-hidden="true" style="margin-top:14px">
             <div class="col">
@@ -147,13 +152,13 @@
             </div>
             <div class="col">
               <h4>Dress Code</h4>
-              <p>Elegant Attire</p>
+              <p>Elegant Attire. No casual outfits; No white dresses</p>
             </div>
           </div>
 
           <div style="display:flex;gap:12px;align-items:center;margin-top:14px">
             <button class="btn primary" onclick="document.getElementById('programScroll').scrollIntoView({behavior:'smooth'})">View Full Schedule</button>
-            <span class="muted" style="font-size:14px">Table: Legacy Resort • <span class="map-link" id="openMap">Legacy Resort, Lusaka</span></span>
+            <span class="muted" style="font-size:14px">Location:• <span class="map-link" id="openMap">Lusaka Legacy Resort</span></span>
           </div>
 
           <hr style="border:none;border-top:1px solid rgba(43,43,43,0.04);margin:18px 0">
@@ -182,7 +187,7 @@
           </ul>
 
           <hr style="border:none;border-top:1px solid rgba(43,43,43,0.04);margin:16px 0">
-          <p class="muted">Reception Hall Access — Cynthia Mulumba, Table 7. No casual outfits; no white dresses. Strictly no children. Outside alcohol is not permitted. Cash bar available at venue.</p>
+          <p class="muted">Reception Hall Access — Cynthia Mulumba, Table 7. Strictly no children. Outside alcohol is not permitted. Cash bar available at venue. </p>
         </div>
       </main>
 
@@ -198,14 +203,8 @@
           </div>
           <div style="display:flex;gap:8px;margin-top:8px">
             <button id="clearBtn" class="secondary">Clear</button>
-            <button id="randomBtn" class="secondary">Try a random guest</button>
           </div>
           <div id="result" class="result" style="display:none;margin-top:12px" aria-live="polite"></div>
-
-          <div style="display:flex;gap:8px;margin-top:12px">
-            <button id="showAll" class="secondary">Show All</button>
-            <button id="downloadCsv" class="secondary">Download CSV</button>
-          </div>
 
           <div id="allGuestsContainer" style="margin-top:12px;display:none;max-height:420px;overflow:auto">
             <table id="guestTable" aria-live="polite">
