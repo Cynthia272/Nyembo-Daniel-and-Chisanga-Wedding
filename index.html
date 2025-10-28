@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John & Jill's Wedding</title>
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #000;
+  color: #d4af37;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+header {
+  padding: 40px 20px;
+  background-color: #111;
+}
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+h2 {
+  font-weight: normal;
+  color: #f5d77d;
+}
+section {
+  padding: 40px 20px;
+}
+input[type="text"] {
+  padding: 10px;
+  width: 250px;
+  border: 2px solid #d4af37;
+  border-radius: 6px;
+  margin-right: 10px;
+  background: #111;
+  color: #fff;
+}
+button {
+  padding: 10px 15px;
+  background: #d4af37;
+  border: none;
+  color: #000;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:hover {
+  background: #b8962e;
+}
+#result {
+  margin-top: 30px;
+  font-size: 1.2em;
+}
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 80%;
+  color: #fff;
+}
+th, td {
+  border: 1px solid #d4af37;
+  padding: 8px;
+}
+th {
+  background: #222;
+}
+footer {
+  padding: 20px;
+  background-color: #111;
+  color: #888;
+  font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>John & Jill</h1>
+  <h2>13 November 2025 · Legacy Resort, Lusaka</h2>
+</header>
+<section id="lookup">
+  <h2>Find Your Table</h2>
+  <input type="text" id="guestName" placeholder="Enter your name">
+  <button onclick="searchGuest()">Search</button>
+  <div id="result"></div>
+</section>
+<footer>© 2025 John & Jill's Wedding</footer>
+
+<script>
+const guests = [{'id': '001', 'name': 'Guest 1', 'table': 6, 'status': 'Awaiting Check-In'}, {'id': '002', 'name': 'Guest 2', 'table': 10, 'status': 'Checked-In'}, {'id': '003', 'name': 'Guest 3', 'table': 20, 'status': 'Not Arrived'}, {'id': '004', 'name': 'Guest 4', 'table': 19, 'status': 'Checked-In'}, {'id': '005', 'name': 'Guest 5', 'table': 11, 'status': 'Checked-In'}, {'id': '006', 'name': 'Guest 6', 'table': 14, 'status': 'Not Arrived'}, {'id': '007', 'name': 'Guest 7', 'table': 19, 'status': 'Checked-In'}, {'id': '008', 'name': 'Guest 8', 'table': 3, 'status': 'Awaiting Check-In'}, {'id': '009', 'name': 'Guest 9', 'table': 5, 'status': 'Awaiting Check-In'}, {'id': '010', 'name': 'Guest 10', 'table': 20, 'status': 'Checked-In'}, {'id': '011', 'name': 'Guest 11', 'table': 8, 'status': 'Awaiting Check-In'}, {'id': '012', 'name': 'Guest 12', 'table': 7, 'status': 'Checked-In'}, {'id': '013', 'name': 'Guest 13', 'table': 19, 'status': 'Awaiting Check-In'}, {'id': '014', 'name': 'Guest 14', 'table': 7, 'status': 'Checked-In'}, {'id': '015', 'name': 'Guest 15', 'table': 16, 'status': 'Awaiting Check-In'}, {'id': '016', 'name': 'Guest 16', 'table': 3, 'status': 'Checked-In'}, {'id': '017', 'name': 'Guest 17', 'table': 16, 'status': 'Awaiting Check-In'}, {'id': '018', 'name': 'Guest 18', 'table': 20, 'status': 'Checked-In'}, {'id': '019', 'name': 'Guest 19', 'table': 3, 'status': 'Checked-In'}, {'id': '020', 'name': 'Guest 20', 'table': 5, 'status': 'Not Arrived'}, {'id': '021', 'name': 'Guest 21', 'table': 5, 'status': 'Awaiting Check-In'}, {'id': '022', 'name': 'Guest 22', 'table': 16, 'status': 'Checked-In'}, {'id': '023', 'name': 'Guest 23', 'table': 17, 'status': 'Not Arrived'}, {'id': '024', 'name': 'Guest 24', 'table': 13, 'status': 'Not Arrived'}, {'id': '025', 'name': 'Guest 25', 'table': 3, 'status': 'Not Arrived'}, {'id': '026', 'name': 'Guest 26', 'table': 3, 'status': 'Not Arrived'}, {'id': '027', 'name': 'Guest 27', 'table': 16, 'status': 'Awaiting Check-In'}, {'id': '028', 'name': 'Guest 28', 'table': 3, 'status': 'Checked-In'}, {'id': '029', 'name': 'Guest 29', 'table': 12, 'status': 'Not Arrived'}, {'id': '030', 'name': 'Guest 30', 'table': 17, 'status': 'Not Arrived'}, {'id': '031', 'name': 'Guest 31', 'table': 16, 'status': 'Not Arrived'}, {'id': '032', 'name': 'Guest 32', 'table': 8, 'status': 'Awaiting Check-In'}, {'id': '033', 'name': 'Guest 33', 'table': 12, 'status': 'Checked-In'}, {'id': '034', 'name': 'Guest 34', 'table': 8, 'status': 'Awaiting Check-In'}, {'id': '035', 'name': 'Guest 35', 'table': 13, 'status': 'Awaiting Check-In'}, {'id': '036', 'name': 'Guest 36', 'table': 4, 'status': 'Awaiting Check-In'}, {'id': '037', 'name': 'Guest 37', 'table': 10, 'status': 'Not Arrived'}, {'id': '038', 'name': 'Guest 38', 'table': 14, 'status': 'Checked-In'}, {'id': '039', 'name': 'Guest 39', 'table': 7, 'status': 'Checked-In'}, {'id': '040', 'name': 'Guest 40', 'table': 10, 'status': 'Not Arrived'}, {'id': '041', 'name': 'Guest 41', 'table': 18, 'status': 'Checked-In'}, {'id': '042', 'name': 'Guest 42', 'table': 3, 'status': 'Not Arrived'}, {'id': '043', 'name': 'Guest 43', 'table': 15, 'status': 'Checked-In'}, {'id': '044', 'name': 'Guest 44', 'table': 2, 'status': 'Awaiting Check-In'}, {'id': '045', 'name': 'Guest 45', 'table': 6, 'status': 'Awaiting Check-In'}, {'id': '046', 'name': 'Guest 46', 'table': 18, 'status': 'Checked-In'}, {'id': '047', 'name': 'Guest 47', 'table': 10, 'status': 'Checked-In'}, {'id': '048', 'name': 'Guest 48', 'table': 13, 'status': 'Not Arrived'}, {'id': '049', 'name': 'Guest 49', 'table': 3, 'status': 'Awaiting Check-In'}, {'id': '050', 'name': 'Guest 50', 'table': 4, 'status': 'Checked-In'}, {'id': '051', 'name': 'Guest 51', 'table': 2, 'status': 'Not Arrived'}, {'id': '052', 'name': 'Guest 52', 'table': 18, 'status': 'Awaiting Check-In'}, {'id': '053', 'name': 'Guest 53', 'table': 15, 'status': 'Checked-In'}, {'id': '054', 'name': 'Guest 54', 'table': 20, 'status': 'Not Arrived'}, {'id': '055', 'name': 'Guest 55', 'table': 3, 'status': 'Awaiting Check-In'}, {'id': '056', 'name': 'Guest 56', 'table': 8, 'status': 'Checked-In'}, {'id': '057', 'name': 'Guest 57', 'table': 8, 'status': 'Checked-In'}, {'id': '058', 'name': 'Guest 58', 'table': 13, 'status': 'Not Arrived'}, {'id': '059', 'name': 'Guest 59', 'table': 8, 'status': 'Awaiting Check-In'}, {'id': '060', 'name': 'Guest 60', 'table': 16, 'status': 'Not Arrived'}, {'id': '061', 'name': 'Guest 61', 'table': 9, 'status': 'Awaiting Check-In'}, {'id': '062', 'name': 'Guest 62', 'table': 9, 'status': 'Checked-In'}, {'id': '063', 'name': 'Guest 63', 'table': 11, 'status': 'Checked-In'}, {'id': '064', 'name': 'Guest 64', 'table': 13, 'status': 'Not Arrived'}, {'id': '065', 'name': 'Guest 65', 'table': 5, 'status': 'Not Arrived'}, {'id': '066', 'name': 'Guest 66', 'table': 14, 'status': 'Awaiting Check-In'}, {'id': '067', 'name': 'Guest 67', 'table': 10, 'status': 'Checked-In'}, {'id': '068', 'name': 'Guest 68', 'table': 4, 'status': 'Awaiting Check-In'}, {'id': '069', 'name': 'Guest 69', 'table': 10, 'status': 'Awaiting Check-In'}, {'id': '070', 'name': 'Guest 70', 'table': 20, 'status': 'Not Arrived'}, {'id': '071', 'name': 'Guest 71', 'table': 13, 'status': 'Awaiting Check-In'}, {'id': '072', 'name': 'Guest 72', 'table': 10, 'status': 'Awaiting Check-In'}, {'id': '073', 'name': 'Guest 73', 'table': 12, 'status': 'Awaiting Check-In'}, {'id': '074', 'name': 'Guest 74', 'table': 11, 'status': 'Not Arrived'}, {'id': '075', 'name': 'Guest 75', 'table': 11, 'status': 'Awaiting Check-In'}, {'id': '076', 'name': 'Guest 76', 'table': 5, 'status': 'Not Arrived'}, {'id': '077', 'name': 'Guest 77', 'table': 9, 'status': 'Awaiting Check-In'}, {'id': '078', 'name': 'Guest 78', 'table': 19, 'status': 'Awaiting Check-In'}, {'id': '079', 'name': 'Guest 79', 'table': 6, 'status': 'Not Arrived'}, {'id': '080', 'name': 'Guest 80', 'table': 4, 'status': 'Not Arrived'}, {'id': '081', 'name': 'Guest 81', 'table': 13, 'status': 'Checked-In'}, {'id': '082', 'name': 'Guest 82', 'table': 20, 'status': 'Not Arrived'}, {'id': '083', 'name': 'Guest 83', 'table': 6, 'status': 'Awaiting Check-In'}, {'id': '084', 'name': 'Guest 84', 'table': 5, 'status': 'Not Arrived'}, {'id': '085', 'name': 'Guest 85', 'table': 11, 'status': 'Awaiting Check-In'}, {'id': '086', 'name': 'Guest 86', 'table': 2, 'status': 'Not Arrived'}, {'id': '087', 'name': 'Guest 87', 'table': 2, 'status': 'Checked-In'}, {'id': '088', 'name': 'Guest 88', 'table': 9, 'status': 'Checked-In'}, {'id': '089', 'name': 'Guest 89', 'table': 17, 'status': 'Not Arrived'}, {'id': '090', 'name': 'Guest 90', 'table': 9, 'status': 'Checked-In'}, {'id': '091', 'name': 'Guest 91', 'table': 13, 'status': 'Awaiting Check-In'}, {'id': '092', 'name': 'Guest 92', 'table': 7, 'status': 'Not Arrived'}, {'id': '093', 'name': 'Guest 93', 'table': 11, 'status': 'Not Arrived'}, {'id': '094', 'name': 'Guest 94', 'table': 20, 'status': 'Awaiting Check-In'}, {'id': '095', 'name': 'Guest 95', 'table': 11, 'status': 'Awaiting Check-In'}, {'id': '096', 'name': 'Guest 96', 'table': 14, 'status': 'Awaiting Check-In'}, {'id': '097', 'name': 'Guest 97', 'table': 13, 'status': 'Not Arrived'}, {'id': '098', 'name': 'Guest 98', 'table': 20, 'status': 'Checked-In'}, {'id': '099', 'name': 'Guest 99', 'table': 5, 'status': 'Checked-In'}, {'id': '100', 'name': 'Guest 100', 'table': 6, 'status': 'Checked-In'}];
+
+function searchGuest() {
+  const nameInput = document.getElementById('guestName').value.trim().toLowerCase();
+  const resultDiv = document.getElementById('result');
+  resultDiv.innerHTML = '';
+  if (!nameInput) {
+    resultDiv.innerHTML = '<p>Please enter your name.</p>';
+    return;
+  }
+  const found = guests.find(g => g.name.toLowerCase() === nameInput);
+  if (found) {
+    resultDiv.innerHTML = `<p><strong>${found.name}</strong><br>Table Number: <strong>${found.table}</strong><br>Status: <strong>${found.status}</strong></p>`;
+  } else {
+    resultDiv.innerHTML = '<p>Name not found. Please check your spelling.</p>';
+  }
+}
+</script>
+</body>
+</html>
